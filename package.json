@@ -1,0 +1,66 @@
+{
+  "name": "ECS",
+  "productName": "ECS",
+  "version": "1.0.0",
+  "description": "ECS by PureTik",
+  "main": "index.js",
+  "build": {
+    "asar": true
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\"",
+    "dev": "concurrently \"cd src && npm start\" \" electron .\"",
+    "serverStart": "cd src && npm start",
+    "serverStop": "npx kill-port 3001",
+    "serverPort": "for /f 'tokens=5' %a in (`netstat -aon ^| find ':3001' ^| find 'LISTENING'`) do taskkill /f /pid %a",
+    "electron:start": "concurrently \"cd src && npm start\" \"electron-forge start\""
+   
+  },
+  "keywords": [],
+  "author": "PureTik",
+  "license": "PureTik",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "hooks": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "PureTik"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-deb": "^6.0.0-beta.65",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "electron": "19.0.9",
+    "electron-packager": "^15.5.1"
+  }
+}
